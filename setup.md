@@ -2,6 +2,8 @@
 
 This guide will help you set up your development environment for the MScFE program.
 
+> **Note**: If you just want to view your study materials in the web interface, you don't need any of this setup! Simply run `npx serve -p 8000` and open http://localhost:8000. This setup is for when you start doing actual financial engineering work with Python (coding assignments, data analysis, etc.).
+
 ## Prerequisites
 
 - Python 3.9 or higher

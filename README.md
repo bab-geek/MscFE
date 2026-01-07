@@ -54,9 +54,31 @@ Additional folders:
 
 ## Getting Started
 
-1. Navigate to the specific course folder you're working on
-2. Review the course-specific README for detailed information
-3. Follow the weekly structure within each course
+### Quick Start - Web Interface (Recommended)
+
+View your study materials in a beautiful web interface:
+
+```bash
+# Start the web server (no installation needed!)
+npx serve -p 8000
+
+# Or use Python
+python3 -m http.server 8000
+
+# Or use the script
+./start-server.sh
+```
+
+Then open: http://localhost:8000
+
+### For Development Work
+
+When you start doing Python assignments and projects:
+
+1. See `setup.md` for Python environment setup
+2. Navigate to the specific course folder you're working on
+3. Review the course-specific README for detailed information
+4. Follow the weekly structure within each course
 
 ## Notes
 

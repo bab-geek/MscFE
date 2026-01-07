@@ -13,41 +13,38 @@ A beautiful, local web interface for your Master of Science in Financial Enginee
 
 ## Quick Start
 
-### Option 1: Python HTTP Server (Recommended)
+**Simplest way** - No installation needed:
 
 ```bash
-# Navigate to project root
-cd /Users/oluwatosingbenga/NODE/MscFE
+# From project root
+npx serve -p 8000
+```
 
-# Start server (Python 3)
+Then open: http://localhost:8000
+
+---
+
+**Alternative Options:**
+
+### Option 1: Using the start script
+
+```bash
+./start-server.sh
+```
+
+### Option 2: Python HTTP Server
+
+```bash
 python3 -m http.server 8000
-
-# Or Python 2
-python -m SimpleHTTPServer 8000
 ```
-
-Then open: http://localhost:8000
-
-### Option 2: Node.js Serve
-
-```bash
-# Install serve globally (if not already installed)
-npm install -g serve
-
-# Navigate to project root
-cd /Users/oluwatosingbenga/NODE/MscFE
-
-# Start server
-serve -p 8000
-```
-
-Then open: http://localhost:8000
 
 ### Option 3: VS Code Live Server
 
 1. Install "Live Server" extension in VS Code
 2. Right-click on `index.html`
 3. Select "Open with Live Server"
+
+**That's it!** No Python virtual environments, no package installations, no dependencies.
 
 ## Usage
 

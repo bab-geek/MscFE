@@ -19,6 +19,13 @@ const courseStructure = {
                         title: "Lesson 2: Counterparties and Credit Risk",
                         studyGuide: "01-financial-markets/modules/credit-risk-and-financing/lesson-02-study-guide.md",
                         practice: "01-financial-markets/modules/credit-risk-and-financing/lesson-02-practice-questions.md"
+                    },
+                    {
+                        id: "lesson-03",
+                        title: "Lesson 3: Buying and Selling Short",
+                        studyGuide: "01-financial-markets/modules/credit-risk-and-financing/lesson-03-study-guide.md",
+                        practice: "01-financial-markets/modules/credit-risk-and-financing/lesson-03-practice-questions.md",
+                        original: "01-financial-markets/modules/credit-risk-and-financing/lesson-03-buying-and-selling-short.md"
                     }
                 ]
             }
@@ -126,7 +133,7 @@ function toggleSidebar() {
 }
 
 // Content loading
-async function loadContent(filePath, breadcrumbText = null) {
+async function loadContent(filePath, breadcrumbText = null, mode = 'read') {
     const contentBody = document.getElementById('contentBody');
     contentBody.innerHTML = '<div class="loading">Loading content...</div>';
 
@@ -141,8 +148,30 @@ async function loadContent(filePath, breadcrumbText = null) {
         }
         
         const text = await response.text();
-        const html = markdownToHTML(text);
-        contentBody.innerHTML = `<div class="content">${html}</div>`;
+        const isPracticeQuestion = filePath.includes('practice-questions');
+        
+        if (isPracticeQuestion && mode === 'quiz') {
+            // Interactive quiz mode
+            contentBody.innerHTML = '<div id="quizContainer"></div>';
+            activateQuizMode(text, 'quizContainer');
+        } else {
+            // Regular reading mode
+            const html = markdownToHTML(text);
+            
+            // Add mode toggle for practice questions
+            const modeToggle = isPracticeQuestion ? `
+                <div class="mode-toggle">
+                    <button class="mode-btn ${mode === 'read' ? 'active' : ''}" onclick="loadContent('${filePath}', '${breadcrumbText}', 'read')">
+                        📖 Read Mode
+                    </button>
+                    <button class="mode-btn ${mode === 'quiz' ? 'active' : ''}" onclick="loadContent('${filePath}', '${breadcrumbText}', 'quiz')">
+                        ✏️ Quiz Mode
+                    </button>
+                </div>
+            ` : '';
+            
+            contentBody.innerHTML = `${modeToggle}<div class="content">${html}</div>`;
+        }
         
         // Update hash
         window.location.hash = encodeURIComponent(filePath);
@@ -268,6 +297,7 @@ function showModuleOverview(courseId, moduleId, module) {
                         <div style="margin-left: 2rem; margin-top: 0.5rem;">
                             <a href="#" onclick="loadContent('${lesson.studyGuide}')" style="font-size: 0.9em; color: var(--accent-color);">Study Guide</a> | 
                             <a href="#" onclick="loadContent('${lesson.practice}')" style="font-size: 0.9em; color: var(--accent-color);">Practice Questions</a>
+                            ${lesson.original ? ` | <a href=\"#\" onclick=\"loadContent('${lesson.original}')\" style=\"font-size: 0.9em; color: var(--accent-color);\">Original Notes</a>` : ''}
                         </div>
                     </li>`
                 ).join('')}
